@@ -1,9 +1,9 @@
 import db from "../models/index.cjs";
 
-export class RankController {
+export class ClassController {
   static async listRank(req, res) {
     try {
-      const allRank = await db.Rank.findAll();
+      const allRank = await db.Class.findAll();
       return res.status(200).json(allRank);
     } catch (err) {
       return res.status(500).json(err.message);

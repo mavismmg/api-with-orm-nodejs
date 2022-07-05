@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Rank', {
+    await queryInterface.createTable('Classes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -20,7 +20,7 @@ module.exports = {
       level_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Level', key: 'id'}
+        references: { model: 'Levels', key: 'id'}
       },
       createdAt: {
         allowNull: false,
@@ -33,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Rank');
+    await queryInterface.dropTable('Classes');
   }
 };

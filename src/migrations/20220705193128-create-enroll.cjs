@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Enroll', {
@@ -16,10 +17,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'People', key: 'id'}
       },
-      rank_id: {
+      class_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Rank', key: 'id'}
+        references: { model: 'Classes', key: 'id'}
       },
       createdAt: {
         allowNull: false,

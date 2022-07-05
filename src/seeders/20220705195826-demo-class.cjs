@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("Rank", [
+    await queryInterface.bulkInsert("Classes", [
       {
         join_date: "2022-02-01",
         level_id: 1,
@@ -35,6 +35,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Rank', null, {});
+    await queryInterface.bulkDelete('Classes', null, {});
   }
 };

@@ -7,7 +7,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class People extends Model {
     static associate(models) {
-      People.hasMany(models.Rank, {
+      People.hasMany(models.Class, {
         foreignKey: "jedimaster_id"
       });
       People.hasMany(models.Enroll, {

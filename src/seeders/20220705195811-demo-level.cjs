@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("Level", [
+    await queryInterface.bulkInsert("Levels", [
       {
         level_desc: "Master",
         createdAt: new Date(),
@@ -27,6 +27,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Level', null, {});
+    await queryInterface.bulkDelete('Levels', null, {});
   }
 };

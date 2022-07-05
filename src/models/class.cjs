@@ -5,24 +5,24 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Rank extends Model {
+  class Class extends Model {
     static associate(models) {
-     Rank.hasMany(models.Enroll, {
-        foreignKey:  "rank_id"
+      Class.hasMany(models.Enroll, {
+        foreignKey: "class_id"
       });
-     Rank.belongsTo(models.People, {
+      Class.belongsTo(models.People, {
         foreignKey: "jedimaster_id"
       });
-     Rank.belongsTo(models.Levels, {
+      Class.belongsTo(models.Level, {
         foreignKey: "level_id"
       });
     }
   }
- Rank.init({
+ Class.init({
     join_date: DataTypes.DATEONLY
   }, {
     sequelize,
-    modelName: 'Rank',
+    modelName: 'Class',
   });
-  return Rank;
+  return Class;
 };
