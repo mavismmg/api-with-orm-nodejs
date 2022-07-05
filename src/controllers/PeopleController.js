@@ -1,8 +1,6 @@
-//import db from "../models/index.cjs";
+import db from "../models/index.cjs";
 
-const db = require("../models");
-
-module.exports = class PeopleController {
+export class PeopleController {
   static async getAllPeople(req, res) {
     try {
       const allPeople = await db.People.findAll();
