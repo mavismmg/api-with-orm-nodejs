@@ -3,7 +3,7 @@ import db from "../models/index.cjs";
 export class LevelController {
   static async listLevel(req, res) {
     try {
-      const allLevel = await db.Level.findAll();
+      const allLevel = await db.Levels.findAll();
       return res.status(200).json(allLevel);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -12,7 +12,7 @@ export class LevelController {
   static async listLevelById(req, res) {
     const { id } = req.params;
     try {
-      const singleLevel = await db.Level.findOne({
+      const singleLevel = await db.Levels.findOne({
         where: {
           id: Number(id)
         }
@@ -25,7 +25,7 @@ export class LevelController {
   static async createLevel(req, res) {
     const newLevel = req.body;
     try {
-      const createdNewLevel = await db.Level.create(newLevel);
+      const createdNewLevel = await db.Levels.create(newLevel);
       return res.status(200).json(createdNewLevel);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -35,12 +35,12 @@ export class LevelController {
     const { id } = req.params;
     const updateInfo = req.body;
     try {
-      await db.Level.update(updateInfo, {
+      await db.Levels.update(updateInfo, {
         where: {
           id: Number(id)
         }
       });
-      const updateLevel = await db.Level.findOne({
+      const updateLevel = await db.Levels.findOne({
         where: {
           id: Number(id)
         }
@@ -53,7 +53,7 @@ export class LevelController {
   static async deleteLevel(req, res) {
     const { id } = req.params;
     try {
-      await db.Level.destroy({
+      await db.Levels.destroy({
         where: {
           id: Number(id)
         }

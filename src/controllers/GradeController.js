@@ -3,7 +3,7 @@ import db from "../models/index.cjs";
 export class GradeController {
   static async listGrade(req, res) {
     try {
-      const allGrade = await db.Grade.findAll();
+      const allGrade = await db.Grades.findAll();
       return res.status(200).json(allGrade);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -12,7 +12,7 @@ export class GradeController {
   static async listGradeById(req, res) {
     const { id } = req.params;
     try {
-      const singleGrade = await db.Grade.findOne({
+      const singleGrade = await db.Grades.findOne({
         where: {
           id: Number(id)
         }
@@ -25,7 +25,7 @@ export class GradeController {
   static async createGrade(req, res) {
     const newGrade = req.body;
     try {
-      const createdNewGrade = await db.Grade.create(newGrade);
+      const createdNewGrade = await db.Grades.create(newGrade);
       return res.status(200).json(createdNewGrade);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -35,12 +35,12 @@ export class GradeController {
     const { id } = req.params;
     const updateInfo = req.body;
     try {
-      await db.Grade.update(updateInfo, {
+      await db.Grades.update(updateInfo, {
         where: {
           id: Number(id)
         }
       });
-      const updateGrade = await db.Grade.findOne({
+      const updateGrade = await db.Grades.findOne({
         where: {
           id: Number(id)
         }
@@ -53,7 +53,7 @@ export class GradeController {
   static async deleteGrade(req, res) {
     const { id } = req.params;
     try {
-      await db.Grade.destroy({
+      await db.Grades.destroy({
         where: {
           id: Number(id)
         }
