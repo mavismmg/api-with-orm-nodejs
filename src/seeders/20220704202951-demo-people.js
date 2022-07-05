@@ -5,7 +5,7 @@ module.exports = {
    await queryInterface.bulkInsert("People", [
     {
       name: "Luke Skywalker",
-      active: 1,
+      active: true,
       email: "luckeskywalker@mail.com",
       role: "student",
       createdAt: new Date(),
@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       name: "Anakin Skywalker",
-      active: 0,
+      active: false,
       email: "anakinskywalker@mail.com",
       role: "teacher",
       createdAt: new Date(),
@@ -21,7 +21,7 @@ module.exports = {
     },
     {
       name: "Obi Wan",
-      active: 0,
+      active: false,
       email: "obiwan@mail.com",
       role: "teacher",
       createdAt: new Date(),
@@ -29,7 +29,7 @@ module.exports = {
     },
     {
       name: "Leia Organa",
-      active: 0,
+      active: false,
       email: "leia@mail.com",
       role: "student",
       createdAt: new Date(),
