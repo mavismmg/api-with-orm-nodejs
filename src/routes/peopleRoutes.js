@@ -8,6 +8,10 @@ router
   .get("/people/:id", PeopleController.listPeopleById)
   .post("/people", PeopleController.createPeople)
   .put("/people/:id", PeopleController.updatePeople)
-  .delete("/people/:id", PeopleController.deletePeople);
+  .delete("/people/:id", PeopleController.deletePeople)
+  .get("/people/:padawanId/enroll/:enrollId", PeopleController.pullPeopleEnroll)
+  .post("/people/:padawanId/enroll", PeopleController.createPeopleEnroll)
+  .put("/people/:padawanId/enroll/:enrollId", PeopleController.updatePeopleEnroll)
+  .delete("/people/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll);
 
 export default router;
