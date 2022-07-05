@@ -7,6 +7,12 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class People extends Model {
     static associate(models) {
+      People.hasMany(models.Rank, {
+        foreignKey: "jedimaster_id"
+      });
+      People.hasMany(models.Enroll, {
+        foreignKey: "padawan_id"
+      });
     }
   }
   People.init({
