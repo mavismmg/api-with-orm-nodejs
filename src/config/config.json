@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "mysql",
-    "database": "english_school",
+    "database": "jedischool",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

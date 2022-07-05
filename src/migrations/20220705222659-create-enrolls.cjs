@@ -2,25 +2,25 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Classes', {
+    await queryInterface.createTable('Enrolls', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      join_date: {
-        type: Sequelize.DATEONLY
+      status: {
+        type: Sequelize.STRING
       },
-      jedimaster_id: {
+      padawan_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'People', key: 'id'}
       },
-      level_id: {
+      grade_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Levels', key: 'id'}
+        references: { model: 'Grades', key: 'id'}
       },
       createdAt: {
         allowNull: false,
@@ -33,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Classes');
+    await queryInterface.dropTable('Enrolls');
   }
 };

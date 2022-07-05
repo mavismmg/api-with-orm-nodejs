@@ -5,24 +5,24 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Class extends Model {
+  class Grades extends Model {
     static associate(models) {
-      Class.hasMany(models.Enroll, {
-        foreignKey: "class_id"
+      Grades.hasMany(models.Enrolls, {
+        foreignKey: "grade_id"
       });
-      Class.belongsTo(models.People, {
+      Grades.belongsTo(models.People, {
         foreignKey: "jedimaster_id"
       });
-      Class.belongsTo(models.Level, {
+      Grades.belongsTo(models.Levels, {
         foreignKey: "level_id"
       });
     }
   }
- Class.init({
+ Grades.init({
     join_date: DataTypes.DATEONLY
   }, {
     sequelize,
-    modelName: 'Class',
+    modelName: 'Grades',
   });
-  return Class;
+  return Grades;
 };
