@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { ClassController } from "../controllers/ClassController.js";
+import { GradeController } from "../controllers/GradeController.js";
 
 const router = Router();
 
 router
-  .get("/class", ClassController.listRank)
-  .get("/class/:id", ClassController.listRankById)
-  .post("/class", ClassController.createRank)
-  .put("/class/:id", ClassController.updateRank)
-  .delete("/class/:id", ClassController.deleteRank);
+  .get("/grade", GradeController.listGrade)
+  .get("/grade/:id", GradeController.listGradeById)
+  .post("/grade", GradeController.createGrade)
+  .put("/grade/:id", GradeController.updateGrade)
+  .delete("/grade/:id", GradeController.deleteGrade);
 
 export default router;

@@ -5,18 +5,18 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Level extends Model {
+  class Levels extends Model {
     static associate(models) {
-      Level.hasMany(models.Class, {
+      Levels.hasMany(models.Grades, {
         foreignKey: "level_id"
       });
     }
   }
-  Level.init({
+  Levels.init({
     level_desc: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Level',
+    modelName: 'Levels',
   });
-  return Level;
+  return Levels;
 };

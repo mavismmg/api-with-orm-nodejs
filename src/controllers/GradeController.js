@@ -1,59 +1,59 @@
 import db from "../models/index.cjs";
 
-export class ClassController {
-  static async listRank(req, res) {
+export class GradeController {
+  static async listGrade(req, res) {
     try {
-      const allRank = await db.Class.findAll();
-      return res.status(200).json(allRank);
+      const allGrade = await db.Grade.findAll();
+      return res.status(200).json(allGrade);
     } catch (err) {
       return res.status(500).json(err.message);
     }
   };
-  static async listRankById(req, res) {
+  static async listGradeById(req, res) {
     const { id } = req.params;
     try {
-      const singleRank = await db.Rank.findOne({
+      const singleGrade = await db.Grade.findOne({
         where: {
           id: Number(id)
         }
       });
-      return res.status(200).json(singleRank);   
+      return res.status(200).json(singleGrade);   
     } catch (err) {
       return res.status(500).json(err.message);
     }
   };
-  static async createRank(req, res) {
-    const newRank = req.body;
+  static async createGrade(req, res) {
+    const newGrade = req.body;
     try {
-      const createdNewRank = await db.Rank.create(newRank);
-      return res.status(200).json(createdNewRank);
+      const createdNewGrade = await db.Grade.create(newGrade);
+      return res.status(200).json(createdNewGrade);
     } catch (err) {
       return res.status(500).json(err.message);
     }
   };
-  static async updateRank(req, res) {
+  static async updateGrade(req, res) {
     const { id } = req.params;
     const updateInfo = req.body;
     try {
-      await db.Rank.update(updateInfo, {
+      await db.Grade.update(updateInfo, {
         where: {
           id: Number(id)
         }
       });
-      const updateRank = await db.Rank.findOne({
+      const updateGrade = await db.Grade.findOne({
         where: {
           id: Number(id)
         }
       });
-      return res.status(200).json(updateRank);
+      return res.status(200).json(updateGrade);
     } catch (err) {
       return res.status(500).json(err.message);
     }
   };
-  static async deleteRank(req, res) {
+  static async deleteGrade(req, res) {
     const { id } = req.params;
     try {
-      await db.Rank.destroy({
+      await db.Grade.destroy({
         where: {
           id: Number(id)
         }

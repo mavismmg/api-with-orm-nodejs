@@ -5,21 +5,21 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Enroll extends Model {
+  class Enrolls extends Model {
     static associate(models) {
-      Enroll.belongsTo(models.People, {
+      Enrolls.belongsTo(models.People, {
         foreignKey: "padawan_id"
       });
-      Enroll.belongsTo(models.Class, {
-        foreignKey: "class_id"
+      Enrolls.belongsTo(models.Grades, {
+        foreignKey: "grade_id"
       });
     }
   }
-  Enroll.init({
+  Enrolls.init({
     status: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Enroll',
+    modelName: 'Enrolls',
   });
-  return Enroll;
+  return Enrolls;
 };

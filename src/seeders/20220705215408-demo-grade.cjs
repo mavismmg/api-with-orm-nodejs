@@ -2,24 +2,32 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("Levels", [
+    await queryInterface.bulkInsert("Grades", [
       {
-        level_desc: "Master",
+        join_date: "2022-02-01",
+        level_id: 1,
+        jedimaster_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        level_desc: "Padawan",
+        join_date: "2022-02-01",
+        level_id: 2,
+        jedimaster_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        level_desc: "Non-Jedi",
+        join_date: "2022-02-01",
+        level_id: 3,
+        jedimaster_id: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        level_desc: "Master",
+        join_date: "2022-02-01",
+        level_id: 4,
+        jedimaster_id: 4,
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -27,6 +35,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Levels', null, {});
+    await queryInterface.bulkDelete('Grades', null, {});
   }
 };
