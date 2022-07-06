@@ -5,6 +5,21 @@
 
 MVC is an architectural pattern which means it rules the whole architecture of the applications. Even though often it is known as design pattern but we may be wrong if we refer it only as a design pattern because design patterns are used to solve a specific technical problem, whereas architecture pattern is used for solving architectural problems, so it affects the entire architecture of our application.
 
+### Dependencies
+
+**Dependencies**</br>
+
+- "body-parser": "^1.20.0"
+- "express": "^4.18.1"
+- "mysql2": "^2.3.3"
+- "path": "^0.12.7"
+- "sequelize": "^6.21.2
+- "sequelize-cli": "^6.4.1
+
+**Development Dependencies**</br>
+
+- "nodemon": "^2.0.18"
+
 ### Database
 
 > The project is built in a MySQL database.
@@ -78,5 +93,3 @@ MVC is an architectural pattern which means it rules the whole architecture of t
 ```
 .delete("/people/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll);
 ```
-
-**Database**</br>
