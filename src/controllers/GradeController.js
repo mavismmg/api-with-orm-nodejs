@@ -12,11 +12,7 @@ export class GradeController {
   static async listGradeById(req, res) {
     const { id } = req.params;
     try {
-      const singleGrade = await db.Grades.findOne({
-        where: {
-          id: Number(id)
-        }
-      });
+      const singleGrade = await db.Grades.findOne({ where: { id: Number(id)} });
       return res.status(200).json(singleGrade);   
     } catch (err) {
       return res.status(500).json(err.message);
@@ -35,16 +31,8 @@ export class GradeController {
     const { id } = req.params;
     const updateInfo = req.body;
     try {
-      await db.Grades.update(updateInfo, {
-        where: {
-          id: Number(id)
-        }
-      });
-      const updateGrade = await db.Grades.findOne({
-        where: {
-          id: Number(id)
-        }
-      });
+      await db.Grades.update(updateInfo, { where: { id: Number(id)} });
+      const updateGrade = await db.Grades.findOne({ where: { id: Number(id)} });
       return res.status(200).json(updateGrade);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -53,11 +41,7 @@ export class GradeController {
   static async deleteGrade(req, res) {
     const { id } = req.params;
     try {
-      await db.Grades.destroy({
-        where: {
-          id: Number(id)
-        }
-      });
+      await db.Grades.destroy({ where: { id: Number(id)} });
       return res.status(200).json({message: `Id ${id} deleted.`});
     } catch (err) {
       return res.status(500).json(err.message);
