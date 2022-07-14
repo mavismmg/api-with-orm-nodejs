@@ -8,6 +8,7 @@ router
   .get("/level/:id", LevelController.listLevelById)
   .post("/level", LevelController.createLevel)
   .put("/level/:id", LevelController.updateLevel)
-  .delete("/people/:id", LevelController.deleteLevel);
+  .delete("/level/:id", LevelController.deleteLevel)
+  .post("/level/:id/restore", LevelController.restoreLevel);
 
 export default router;

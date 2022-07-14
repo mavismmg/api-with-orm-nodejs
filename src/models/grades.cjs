@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     join_date: DataTypes.DATEONLY
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Grades',
   });
   return Grades;

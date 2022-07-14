@@ -9,6 +9,7 @@ export class LevelController {
       return res.status(500).json(err.message);
     }
   };
+
   static async listLevelById(req, res) {
     const { id } = req.params;
     try {
@@ -18,6 +19,7 @@ export class LevelController {
       return res.status(500).json(err.message);
     }
   };
+
   static async createLevel(req, res) {
     const newLevel = req.body;
     try {
@@ -27,6 +29,7 @@ export class LevelController {
       return res.status(500).json(err.message);
     }
   };
+
   static async updateLevel(req, res) {
     const { id } = req.params;
     const updateInfo = req.body;
@@ -38,6 +41,7 @@ export class LevelController {
       return res.status(500).json(err.message);
     }
   };
+
   static async deleteLevel(req, res) {
     const { id } = req.params;
     try {
@@ -47,4 +51,14 @@ export class LevelController {
       return res.status(500).json(err.message);
     }
   };
+
+  static async restoreLevel(req, res) {
+    const { id } = req.params;
+    try {
+      await db.Levels.restore({ where: { id: Number(id)} })
+      return res.status(200).json({ message: `id ${id} restored.`});
+    } catch (error) {
+      return res.status(500).json(err.message);
+    }
+  }
 };

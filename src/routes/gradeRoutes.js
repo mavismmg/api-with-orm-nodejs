@@ -8,6 +8,7 @@ router
   .get("/grade/:id", GradeController.listGradeById)
   .post("/grade", GradeController.createGrade)
   .put("/grade/:id", GradeController.updateGrade)
-  .delete("/grade/:id", GradeController.deleteGrade);
+  .delete("/grade/:id", GradeController.deleteGrade)
+  .post("/grade/:id/restore", GradeController.restoreGrade);
 
 export default router;
