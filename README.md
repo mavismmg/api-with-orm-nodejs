@@ -30,68 +30,80 @@ MVC is an architectural pattern which means it rules the whole architecture of t
 
 ### Routes
 
-**GET Routes:**</br>
+These are the routes of the project:</br>
 
 > http://localhost:port/people
+> http://localhost:port/level
+> http://localhost:port/grade
+
+**GET Routes:**</br>
+
+> http://localhost:port/{route}
 
 ```
-.get("/people", PeopleController.listPeople)
+.get("/{route}", PeopleController.listPeople)
 ```
 
-> http://localhost:port/people/:id
+> http://localhost:port/{route}/:id
 
 ```
-.get("/people/:id", PeopleController.listPeopleById)
+.get("/{route}/:id", PeopleController.listPeopleById)
 
 ```
 
-> http://localhost:port/people/:padawanId/enroll/:enrollId
+> http://localhost:port/{route}/:padawanId/enroll/:enrollId
 
 ```
-.get("/people/:padawanId/enroll/:enrollId", PeopleController.pullPeopleEnroll)
+.get("/{route}/:padawanId/enroll/:enrollId", PeopleController.pullPeopleEnroll)
 ```
 
 **POST Routes:**</br>
 
-> http://localhost:port/people/
+> http://localhost:port/{route}/
 
 ```
-.post("/people", PeopleController.createPeople)
+.post("/{route}", PeopleController.createPeople)
 
 ```
 
-> http://localhost:port/people/:padawanId/enroll
+> http://localhost:port/{route}/:padawanId/enroll
 
 ```
-.post("/people/:padawanId/enroll", PeopleController.createPeopleEnroll)
+.post("/{route}/:padawanId/enroll", PeopleController.createPeopleEnroll)
+```
+
+http://localhost:3333/{route}/1/restore
+
+```
+.post("/{route}/:id/restore", PeopleController.resetPeople)
 ```
 
 **PUT Routes:**</br>
 
-> http://localhost:port/people/:id
+> http://localhost:port/{route}/:id
 
 ```
-.put("/people/:id", PeopleController.updatePeople)
+.put("/{route}/:id", PeopleController.updatePeople)
 ```
 
-> http://localhost:port/people/:padawanId/enroll/:enrollId
+> http://localhost:port/{route}/:padawanId/enroll/:enrollId
 
 ```
-.put("/people/:padawanId/enroll/:enrollId", PeopleController.updatePeopleEnroll)
+.put("/{route}/:padawanId/enroll/:enrollId", PeopleController.updatePeopleEnroll)
 ```
 
 **DELETE Routes:**</br>
 
-> http://localhost:port/people/:id
+> http://localhost:port/{route}/:id
 
 ```
-.delete("/people/:id", PeopleController.deletePeople)
+.delete("/{route}/:id", PeopleController.deletePeople)
 ```
 
-> http://localhost:port/people/:padawanId/enroll/:enrollId
+> http://localhost:port/{route}/:padawanId/enroll/:enrollId
 
 ```
-.delete("/people/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll);
+.delete("/{route}/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll);
 ```
 
 ### Installation
