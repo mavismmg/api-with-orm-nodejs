@@ -1,9 +1,18 @@
 import db from "../models/index.cjs";
 
 export class PeopleController {
+  static async listActivePeople(req, res) {
+    try {
+      const activePeople = await db.People.findAll();
+      return res.status(200).json(activePeople);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  };
+
   static async listPeople(req, res) {
     try {
-      const allPeople = await db.People.findAll();
+      const allPeople = await db.People.scope('all').findAll();
       return res.status(200).json(allPeople);
     } catch (err) {
       return res.status(500).json(err.message);
