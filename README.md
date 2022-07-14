@@ -30,83 +30,15 @@ MVC is an architectural pattern which means it rules the whole architecture of t
 
 ### Routes
 
-These are the routes of the project:</br>
-
-> http://localhost:port/people
-> http://localhost:port/level
-> http://localhost:port/grade
-
-**GET Routes:**</br>
-
-> http://localhost:port/{route}
-
-```
-.get("/{route}", PeopleController.listPeople)
-```
-
-> http://localhost:port/{route}/:id
-
-```
-.get("/{route}/:id", PeopleController.listPeopleById)
-
-```
-
-> http://localhost:port/{route}/:padawanId/enroll/:enrollId
-
-```
-.get("/{route}/:padawanId/enroll/:enrollId", PeopleController.pullPeopleEnroll)
-```
-
-**POST Routes:**</br>
-
-> http://localhost:port/{route}/
-
-```
-.post("/{route}", PeopleController.createPeople)
-
-```
-
-> http://localhost:port/{route}/:padawanId/enroll
-
-```
-.post("/{route}/:padawanId/enroll", PeopleController.createPeopleEnroll)
-```
-
-http://localhost:3333/{route}/1/restore
-
-```
-.post("/{route}/:id/restore", PeopleController.resetPeople)
-```
-
-**PUT Routes:**</br>
-
-> http://localhost:port/{route}/:id
-
-```
-.put("/{route}/:id", PeopleController.updatePeople)
-```
-
-> http://localhost:port/{route}/:padawanId/enroll/:enrollId
-
-```
-.put("/{route}/:padawanId/enroll/:enrollId", PeopleController.updatePeopleEnroll)
-```
-
-**DELETE Routes:**</br>
-
-> http://localhost:port/{route}/:id
-
-```
-.delete("/{route}/:id", PeopleController.deletePeople)
-```
-
-> http://localhost:port/{route}/:padawanId/enroll/:enrollId
-
-```
-.delete("/{route}/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll);
-```
+*Documentation will be generated using swagger later*
 
 ### Installation
+
+> git clone https://github.com/mavismmg/api-with-orm-nodejs.git
+> cd api-with-orm-nodejs
+> npm init -y
+> npm install
+> npm run start
 
 ### License
 
