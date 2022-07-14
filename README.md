@@ -35,9 +35,13 @@ MVC is an architectural pattern which means it rules the whole architecture of t
 ### Installation
 
 > git clone https://github.com/mavismmg/api-with-orm-nodejs.git
+
 > cd api-with-orm-nodejs
+
 > npm init -y
+
 > npm install
+
 > npm run start
 
 ### License
