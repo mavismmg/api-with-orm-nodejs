@@ -77,7 +77,7 @@ export class PeopleController {
       const padawanEnroll = await db.Enrolls.findOne({ where: { id: Number(enrollId), padawan_id: Number(padawanId)} });
       return res.status(200).json(padawanEnroll);
     } catch (err) {
-      return res.status(200).json(err.message);
+      return res.status(500).json(err.message);
     }
   };
 
@@ -120,6 +120,24 @@ export class PeopleController {
       const people = await db.People.findOne({ where: { id: Number(padawanId) } });
       const enrolls = await people.getIsEnrolled();
       return res.status(200).json(enrolls);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  };
+
+  static async pullPeopleEnrollByGrade(req, res) {
+    const { gradeId } = req.params;
+    try {
+      const allEnrolls = await db.Enrolls
+        .findAndCountAll({
+          where: {
+            grade_id: Number(gradeId),
+            status: "Active"
+          },
+          limit: 35,
+          order: [["padawan_id", "ASC"]]
+        });
+      return res.status(200).json(allEnrolls);
     } catch (err) {
       return res.status(500).json(err.message);
     }
