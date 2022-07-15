@@ -1,3 +1,4 @@
+import Sequelize from "sequelize";
 import db from "../models/index.cjs";
 
 export class PeopleController {
@@ -138,6 +139,23 @@ export class PeopleController {
           order: [["padawan_id", "ASC"]]
         });
       return res.status(200).json(allEnrolls);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  };
+
+  static async pullCrowdedGrade(req, res) {
+    const enrollLimit = 1;
+    try {
+      const crowedGrade = await db.Enrolls.findAndCountAll({
+        where: {
+          status: "Active"
+        },
+        attributes: ["grade_id"],
+        group: ["grade_id"],
+        having: Sequelize.literal(`COUNT(grade_id) >= ${enrollLimit}`)
+      })
+      return res.status(200).json(crowedGrade.count);
     } catch (err) {
       return res.status(500).json(err.message);
     }
