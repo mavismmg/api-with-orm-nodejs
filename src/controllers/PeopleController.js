@@ -113,4 +113,15 @@ export class PeopleController {
       return res.status(500).json(err.message);
     }
   };
+
+  static async selectPeopleEnroll(req, res) {
+    const { padawanId } = req.params;
+    try {
+      const people = await db.People.findOne({ where: { id: Number(padawanId) } });
+      const enrolls = await people.getIsEnrolled();
+      return res.status(200).json(enrolls);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  };
 };

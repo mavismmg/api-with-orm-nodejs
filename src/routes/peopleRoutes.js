@@ -14,6 +14,7 @@ router
   .get("/people/:padawanId/enroll/:enrollId", PeopleController.pullPeopleEnroll)
   .post("/people/:padawanId/enroll", PeopleController.createPeopleEnroll)
   .put("/people/:padawanId/enroll/:enrollId", PeopleController.updatePeopleEnroll)
-  .delete("/people/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll);
+  .delete("/people/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll)
+  .get("/people/:padawanId/enroll", PeopleController.selectPeopleEnroll);
 
 export default router;
