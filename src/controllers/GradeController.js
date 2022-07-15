@@ -1,9 +1,16 @@
+import Sequelize from "sequelize";
 import db from "../models/index.cjs";
 
 export class GradeController {
   static async listGrade(req, res) {
+    const { start_date, end_date } = req.query;
+    const Op = Sequelize.Op
+    const where = {};
+    start_date || end_date ? where.join_date = {} : null;
+    start_date ? where.join_date[Op.gte] = start_date : null
+    end_date ? where.join_date[Op.lte] = end_date : null
     try {
-      const allGrade = await db.Grades.findAll();
+      const allGrade = await db.Grades.findAll({ where });
       return res.status(200).json(allGrade);
     } catch (err) {
       return res.status(500).json(err.message);

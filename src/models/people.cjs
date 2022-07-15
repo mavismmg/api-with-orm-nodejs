@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "jedimaster_id"
       });
       People.hasMany(models.Enrolls, {
-        foreignKey: "padawan_id"
+        foreignKey: "padawan_id",
+        scope: { status: "Active" },
+        as: "isEnrolled"
       });
     }
   }
