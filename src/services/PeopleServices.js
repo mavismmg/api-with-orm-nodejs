@@ -15,16 +15,22 @@ export class PeopleServices extends Services {
     return db[this.modelName].scope("all").findAll({ where: { ... where }});
   };
 
+  async getPeopleAndEnroll(enrollId = {}, peopleId = {}) {
+    return db.sequelize.transaction(async transaction_ => {
+      await super.getOneRegister({ where: { ... enrollId, ... peopleId }}, { transaction: transaction_ });
+    });
+  };
+
   async updatePeopleAndEnroll(updateInfo, peopleId, enrollId) {
     return db.sequelize.transaction(async transaction_ => {
-      await super.updateRegister(updateInfo, { where: {id: enrollId}, padawan_id: peopleId }, { transaction: transaction_ });
+      await super.updateRegister(updateInfo, { where: { id: enrollId, padawan_id: peopleId }}, { transaction: transaction_ });
     })
-  }
+  };
 
-  async cancelPeopleAndEnroll(padawanId) {
+  async cancelPeopleAndEnroll(peopleId) {
     return db.sequelize.transaction(async transaction_ => {
-      await super.updateRegister({ active: false }, padawanId, { transaction: transaction_ });
-      await this.enrolls.updateRegisters({ status: "Non-Active" }, { padawan_id: padawanId }, { transaction: transaction_ });
+      await super.updateRegister({ active: false }, peopleId, { transaction: transaction_ });
+      await this.enrolls.updateRegisters({ status: "Non-Active" }, { padawan_id: peopleId }, { transaction: transaction_ });
     })
   };
 

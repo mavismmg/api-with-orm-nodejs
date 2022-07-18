@@ -1,6 +1,8 @@
 import { PeopleServices } from "../services/index.js";
+import { EnrollServices } from "../services/index.js";
 
 const peopleServices = new PeopleServices();
+const enrollServices = new EnrollServices();
 
 export class PeopleController {
   static async listActivePeople(req, res) {
@@ -75,8 +77,8 @@ export class PeopleController {
   static async getPeopleEnroll(req, res) {
     const { padawanId, enrollId } = req.params;
     try {
-      // Needs implementation.
-      const padawanEnroll = await peopleServices.getEnrollByPadawan({ id: padawanId });
+      // Needs Implementation.
+      const padawanEnroll = await peopleServices.getPeopleAndEnroll(Number(enrollId), Number(padawanId));
       return res.status(200).json(padawanEnroll);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -108,7 +110,7 @@ export class PeopleController {
   static async deletePeopleEnroll(req, res) {
     const { enrollId } = req.params;
     try {
-      await db.Enrolls.destroy({ where: { id: Number(enrollId)} });
+      await peopleServices.deleteRegister(Number(enrollId));
       return res.status(200).json({message: `Id ${enrollId} deleted.`});
     } catch (err) {
       return res.status(500).json(err.message);
@@ -118,7 +120,7 @@ export class PeopleController {
   static async selectPeopleEnroll(req, res) {
     const { padawanId } = req.params;
     try {
-      const people = await db.People.findOne({ where: { id: Number(padawanId) } });
+      const people = peopleServices.getOneRegister({ padawanId });
       const enrolls = await people.getIsEnrolled();
       return res.status(200).json(enrolls);
     } catch (err) {
@@ -126,35 +128,22 @@ export class PeopleController {
     }
   };
 
-  static async pullPeopleEnrollByGrade(req, res) {
+  static async getPeopleEnrollByGrade(req, res) {
+    // Move this method to Enroll controller.
     const { gradeId } = req.params;
     try {
-      const allEnrolls = await db.Enrolls
-        .findAndCountAll({
-          where: {
-            grade_id: Number(gradeId),
-            status: "Active"
-          },
-          limit: 35,
-          order: [["padawan_id", "ASC"]]
-        });
+      const allEnrolls = enrollServices.getEnrollByGrade(Number(gradeId));
       return res.status(200).json(allEnrolls);
     } catch (err) {
       return res.status(500).json(err.message);
     }
   };
 
-  static async pullCrowdedGrade(req, res) {
+  static async getCrowdedGrade(req, res) {
+    // Move this method to Enroll controller.
     const enrollLimit = 1;
     try {
-      const crowedGrade = await db.Enrolls.findAndCountAll({
-        where: {
-          status: "Active"
-        },
-        attributes: ["grade_id"],
-        group: ["grade_id"],
-        having: Sequelize.literal(`COUNT(grade_id) >= ${enrollLimit}`)
-      })
+      const crowedGrade = enrollServices.getCrowedGradeRegisters(enrollLimit);
       return res.status(200).json(crowedGrade.count);
     } catch (err) {
       return res.status(500).json(err.message);

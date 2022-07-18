@@ -16,8 +16,8 @@ router
   .put("/people/:padawanId/enroll/:enrollId", PeopleController.updatePeopleEnroll)
   .delete("/people/:padawanId/enroll/:enrollId", PeopleController.deletePeopleEnroll)
   .get("/people/:padawanId/enroll", PeopleController.selectPeopleEnroll)
-  .get("/people/enroll/:gradeId/active", PeopleController.pullPeopleEnrollByGrade)
-  .get("/people/enroll/crowed", PeopleController.pullCrowdedGrade)
+  .get("/people/enroll/:gradeId/active", PeopleController.getPeopleEnrollByGrade)
+  .get("/people/enroll/crowed", PeopleController.getCrowdedGrade)
   .post("/people/:peopleId/cancel", PeopleController.cancelPeople);
 
 export default router;
