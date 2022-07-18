@@ -160,4 +160,19 @@ export class PeopleController {
       return res.status(500).json(err.message);
     }
   };
+
+  static async cancelPeople(req, res) {
+    const { peopleId } = req.params;
+    try {
+      db.sequelize.transaction(async transaction_ => {
+        await db.People.update({ 
+          active: false}, { where: { id: Number(peopleId) }} , { transaction: transaction_ });
+        await db.Enrolls.update({ 
+          status: 'Non-Active'}, { where: { padawan_id: Number(peopleId) }}, { transaction: transaction_ });
+        return res.status(200).json({ message: `enroll from ${peopleId} cancelled.`});
+      });
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  };
 };
