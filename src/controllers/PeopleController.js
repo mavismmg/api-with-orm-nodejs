@@ -1,5 +1,3 @@
-// import Sequelize from "sequelize";
-// import db from "../models/index.cjs";
 import { PeopleServices } from "../services/index.js";
 
 const peopleServices = new PeopleServices();
@@ -26,7 +24,7 @@ export class PeopleController {
   static async listPeopleById(req, res) {
     const { id } = req.params;
     try {
-      const singlePerson = await db.People.findOne({ where: { id: Number(id)} });
+      const singlePerson = await peopleServices.getOneRegister({ id });
       return res.status(200).json(singlePerson);   
     } catch (err) {
       return res.status(500).json(err.message);
@@ -36,7 +34,7 @@ export class PeopleController {
   static async createPeople(req, res) {
     const newPerson = req.body;
     try {
-      const createdNewPerson = await db.People.create(newPerson);
+      const createdNewPerson = await peopleServices.createRegister(newPerson);
       return res.status(200).json(createdNewPerson);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -47,9 +45,8 @@ export class PeopleController {
     const { id } = req.params;
     const updateInfo = req.body;
     try {
-      await db.People.update(updateInfo, { where: { id: Number(id)} });
-      const updatePeople = await db.People.findOne({ where: { id: Number(id)} });
-      return res.status(200).json(updatePeople);
+      await peopleServices.updateRegister(updateInfo, Number(id));
+      return res.status(200).json({ message: `id ${id} updated.`});
     } catch (err) {
       return res.status(500).json(err.message);
     }
@@ -58,27 +55,28 @@ export class PeopleController {
   static async deletePeople(req, res) {
     const { id } = req.params;
     try {
-      await db.People.destroy({ where: { id: Number(id)} });
+      await peopleServices.deleteRegister(Number(id));
       return res.status(200).json({message: `Id ${id} deleted.`});
     } catch (err) {
       return res.status(500).json(err.message);
     }
   };
 
-  static async resetPeople(req, res) {
+  static async restorePeople(req, res) {
     const { id } = req.params;
     try {
-      await db.People.restore({ where: { id: Number(id)} });
+      await peopleServices.restoreRegister(Number(id));
       return res.status(200).json({ message: `id ${id} restored.`});
     } catch (err) {
       return res.status(500).json(err.message);
     }
   }
 
-  static async pullPeopleEnroll(req, res) {
+  static async getPeopleEnroll(req, res) {
     const { padawanId, enrollId } = req.params;
     try {
-      const padawanEnroll = await db.Enrolls.findOne({ where: { id: Number(enrollId), padawan_id: Number(padawanId)} });
+      // Needs implementation.
+      const padawanEnroll = await peopleServices.getEnrollByPadawan({ id: padawanId });
       return res.status(200).json(padawanEnroll);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -89,7 +87,7 @@ export class PeopleController {
     const { padawanId } = req.params;
     const newPadawanEnroll = { ...req.body, padawan_id: Number(padawanId) }
     try {
-      const newPadawanEnrollCreated = await db.Enrolls.create(newPadawanEnroll);
+      const newPadawanEnrollCreated = await peopleServices.createRegister(newPadawanEnroll);
       return res.status(200).json(newPadawanEnrollCreated);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -100,9 +98,8 @@ export class PeopleController {
     const { padawanId, enrollId } = req.params;
     const updateInfo = req.body;
     try {
-      await db.Enrolls.update(updateInfo, { where: { id: Number(enrollId), padawan_id: Number(padawanId) }});
-      const updatePeopleEnroll = await db.Enrolls.findOne({ where: { id: Number(enrollId) }});
-      return res.status(200).json(updatePeopleEnroll);
+      await peopleServices.updatePeopleAndEnroll(updateInfo, Number(padawanId), Number(enrollId));
+      return res.status(200).json({ message: `${padawanId} and ${enrollId} updated.`});
     } catch (err) {
       return res.status(500).json(err.message);
     }
@@ -167,7 +164,7 @@ export class PeopleController {
   static async cancelPeople(req, res) {
     const { padawanId } = req.params;
     try {
-      await peopleServices.cancelPeopleAndEnroll(Number(padawanId));
+      await peopleServices.cancelPeopleAndEnroll(Number(padawanId))
       return res.status(200).json({ message: `enroll from ${padawanId} cancelled.`});
     } catch (err) {
       return res.status(500).json(err.message);
