@@ -1,10 +1,13 @@
-import Sequelize from "sequelize";
-import db from "../models/index.cjs";
+// import Sequelize from "sequelize";
+// import db from "../models/index.cjs";
+import { PeopleServices } from "../services/index.js";
+
+const peopleServices = new PeopleServices();
 
 export class PeopleController {
   static async listActivePeople(req, res) {
     try {
-      const activePeople = await db.People.findAll();
+      const activePeople = await peopleServices.getActiveRegisters();
       return res.status(200).json(activePeople);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -13,7 +16,7 @@ export class PeopleController {
 
   static async listPeople(req, res) {
     try {
-      const allPeople = await db.People.scope('all').findAll();
+      const allPeople = await peopleServices.getAllRegisters();
       return res.status(200).json(allPeople);
     } catch (err) {
       return res.status(500).json(err.message);
@@ -162,15 +165,10 @@ export class PeopleController {
   };
 
   static async cancelPeople(req, res) {
-    const { peopleId } = req.params;
+    const { padawanId } = req.params;
     try {
-      db.sequelize.transaction(async transaction_ => {
-        await db.People.update({ 
-          active: false}, { where: { id: Number(peopleId) }} , { transaction: transaction_ });
-        await db.Enrolls.update({ 
-          status: 'Non-Active'}, { where: { padawan_id: Number(peopleId) }}, { transaction: transaction_ });
-        return res.status(200).json({ message: `enroll from ${peopleId} cancelled.`});
-      });
+      await peopleServices.cancelPeopleAndEnroll(Number(padawanId));
+      return res.status(200).json({ message: `enroll from ${padawanId} cancelled.`});
     } catch (err) {
       return res.status(500).json(err.message);
     }

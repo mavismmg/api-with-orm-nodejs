@@ -1,9 +1,13 @@
-import db from "../models/index.cjs";
+// import db from "../models/index.cjs";
+
+import { Services } from "../services/Services.js";
+
+const levelServices = new Services("Enrolls");
 
 export class LevelController {
   static async listLevel(req, res) {
     try {
-      const allLevel = await db.Levels.findAll();
+      const allLevel = await levelServices.getAllRegisters();
       return res.status(200).json(allLevel);
     } catch (err) {
       return res.status(500).json(err.message);
